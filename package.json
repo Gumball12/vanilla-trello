@@ -8,7 +8,12 @@
     "front-serve": "npm run --prefix workspaces/frontend serve"
   },
   "devDependencies": {
-    "vite": "^2.3.0"
+    "chalk": "^4.1.1",
+    "vite": "^2.3.0",
+    "yorkie": "^2.0.0"
+  },
+  "gitHooks": {
+    "commit-msg": "node scripts/verifyCommit.js"
   },
   "workspaces": [
     "workspaces/*"
