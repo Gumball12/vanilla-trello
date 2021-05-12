@@ -1,0 +1,16 @@
+{
+  "name": "mini-trello",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "front-dev": "npm run --prefix workspaces/frontend dev",
+    "front-build": "npm run --prefix workspaces/frontend build",
+    "front-serve": "npm run --prefix workspaces/frontend serve"
+  },
+  "devDependencies": {
+    "vite": "^2.3.0"
+  },
+  "workspaces": [
+    "workspaces/*"
+  ]
+}
