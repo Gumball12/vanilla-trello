@@ -1,4 +1,4 @@
-import mvvm from './share/MvvmHtmlElement';
+import mvvm from './share/MvvmHtmlElement/index.js';
 
 const html = `
 <p>Hello!</p>

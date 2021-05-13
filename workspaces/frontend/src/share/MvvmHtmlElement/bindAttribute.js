@@ -1,5 +1,5 @@
-import { isHTMLElement, isProperty } from './utils/validation';
-import { isNotHTMLElementMsg, isNotPropertyMsg } from './utils/errorMsgs';
+import { isHTMLElement, isProperty } from './utils/validation.js';
+import { isNotHTMLElementMsg, isNotPropertyMsg } from './utils/errorMsgs.js';
 
 /**
  * bind attribute

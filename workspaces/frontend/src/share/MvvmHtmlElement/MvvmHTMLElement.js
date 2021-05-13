@@ -1,10 +1,10 @@
-import kebobToCamel from './utils/kebobToCamel';
-import bindEvent from './bindEvent';
-import twoWayBinding from './twoWayBinding';
-import registerRef from './registerRef';
-import bindProperty from './bindProperty';
-import bindAttribute from './bindAttribute';
-import setData from './setData';
+import kebobToCamel from './utils/kebobToCamel.js';
+import bindEvent from './bindEvent.js';
+import twoWayBinding from './twoWayBinding.js';
+import registerRef from './registerRef.js';
+import bindProperty from './bindProperty.js';
+import bindAttribute from './bindAttribute.js';
+import setData from './setData.js';
 
 /**
  * # MVVM Wrapped HTMLElement

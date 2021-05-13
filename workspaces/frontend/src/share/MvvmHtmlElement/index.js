@@ -1,3 +1,3 @@
-import MvvmHTMLElement from './MvvmHTMLElement';
+import MvvmHTMLElement from './MvvmHTMLElement.js';
 
 export default MvvmHTMLElement;

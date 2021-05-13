@@ -2,12 +2,12 @@ import {
   isHTMLElement,
   isNotEmptyString,
   isProperty,
-} from './utils/validation';
+} from './utils/validation.js';
 import {
   isNotHTMLElementMsg,
   isEmptyStringMsg,
   isAlreadyRegisteredRefMsg,
-} from './utils/errorMsgs';
+} from './utils/errorMsgs.js';
 
 /**
  * register ref
