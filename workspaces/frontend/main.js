@@ -1,3 +1,2 @@
 import './style.css';
-
-document.querySelector('#app').innerHTML = `Trello!`;
+import './src/app';
