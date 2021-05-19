@@ -1,0 +1,32 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+}
+
+.text {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.button {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.headline {
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+}
