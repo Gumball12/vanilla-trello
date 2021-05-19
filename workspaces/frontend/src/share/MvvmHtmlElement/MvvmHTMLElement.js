@@ -64,16 +64,14 @@ export default class extends HTMLElement {
       $data: {
         enumerable: true,
         value: new Proxy(__data ?? {}, {
-          set: (obj, prop, value, recev) => {
+          set: (obj, prop, value) => {
             // invoke watcher
             if (this.$watcher[prop].length !== 0) {
-              this.$watcher[prop].forEach(cb =>
-                cb(Reflect.set(recev, prop, value)),
-              );
+              this.$watcher[prop].forEach(cb => cb(obj[prop], value));
             }
 
             // update data
-            Reflect.set(recev, prop, value);
+            obj[prop] = value;
 
             return true;
           },
@@ -86,12 +84,12 @@ export default class extends HTMLElement {
       $watcher: {
         // { dataName: [ handlers ] }
         value: new Proxy(__watch ?? {}, {
-          get: (obj, prop, recev) => {
+          get: (obj, prop) => {
             if (obj[prop] === undefined) {
-              Reflect.set(recev, prop, []);
+              obj[prop] = [];
             }
 
-            return Reflect.get(recev, prop);
+            return obj[prop];
           },
         }),
       },
