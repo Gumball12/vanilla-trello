@@ -1,7 +1,7 @@
 import mvvm from '/src/share/MvvmHtmlElement/index.js';
 
 const html = `
-<input class="text" @input="updateValue">
+<input class="text" @input="updateValue" m-ref="input">
 
 <style scoped>
 @import url('/src/styles/components.css');
@@ -28,6 +28,7 @@ window.customElements.define(
         },
         methods: {
           updateValue: ({ target: { value } }) => (this.$data.insert = value),
+          focus: () => this.$ref.input.focus(),
         },
       });
     }
