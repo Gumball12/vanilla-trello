@@ -15,7 +15,6 @@ input {
   border: none;
   outline: none;
   background-color: transparent;
-  font-family: 'Nanum Gothic', sans-serif;
   color: var(--black);
 }
 </style>
