@@ -8,11 +8,14 @@ const html = `
 @import url('/src/styles/typo.css');
 
 input {
-  padding: 10px 8px;
   width: 100%;
+  height: 100%;
+  padding: 0;
   border: none;
   outline: none;
-  border-radius: 5px;
+  background-color: transparent;
+  font-family: 'Nanum Gothic', sans-serif;
+  color: var(--black);
 }
 </style>
 `;
