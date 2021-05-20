@@ -8,6 +8,12 @@ pre {
   margin: 0;
 }
 
+input,
+textarea,
+pre {
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
 .text {
   font-size: 12px;
   letter-spacing: 0.02em;
