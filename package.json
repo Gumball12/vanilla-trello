@@ -5,10 +5,15 @@
   "scripts": {
     "front-dev": "npm run --prefix workspaces/frontend dev",
     "front-build": "npm run --prefix workspaces/frontend build",
-    "front-serve": "npm run --prefix workspaces/frontend serve"
+    "front-serve": "npm run --prefix workspaces/frontend serve",
+    "test": "jest"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.14.0",
+    "babel-jest": "^26.6.3",
     "chalk": "^4.1.1",
+    "jest": "^26.6.3",
     "vite": "^2.3.0",
     "yorkie": "^2.0.0"
   },
