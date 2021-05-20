@@ -1,7 +1,8 @@
 import mvvm from '/src/share/MvvmHtmlElement/index.js';
 
 const html = `
-<textarea m-ref="textarea" class="text" @input="updateValue"></textarea>
+<textarea m-ref="textarea" class="text" @input="updateValue"
+  m-attr-placeholder="placeholder"></textarea>
 
 <style scoped>
 @import url('/src/styles/components.css');
@@ -30,6 +31,7 @@ window.customElements.define(
         html,
         data: {
           insert: '',
+          placeholder: '',
         },
         methods: {
           updateValue: ({ target: { value } }) => {
