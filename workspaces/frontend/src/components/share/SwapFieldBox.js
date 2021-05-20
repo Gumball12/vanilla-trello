@@ -6,7 +6,7 @@ const html = `
 <div class="modify-button" m-ref="modify-button"
   @click="displayField">
   <pre class="text" m-prop-text-content="contents"></pre>
-  <icon-box><slot></slot></icon-box>
+  <icon-box @click="emitIconClick"><slot></slot></icon-box>
 </div>
 
 <div class="field" m-ref="field-container"
@@ -54,7 +54,12 @@ window.customElements.define(
           isDisplayField: false,
         },
         methods: {
-          displayField: () => {
+          displayField: ({ target }) => {
+            // ignore icon click event
+            if (target.tagName === 'SLOT') {
+              return;
+            }
+
             // display field component
             this.$data.isDisplayField = true;
 
@@ -89,6 +94,9 @@ window.customElements.define(
               evt.preventDefault();
               this.$methods.closeField();
             }
+          },
+          emitIconClick: () => {
+            this.$emit('iconclick');
           },
         },
         watch: {
