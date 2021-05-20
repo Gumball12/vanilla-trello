@@ -8,6 +8,11 @@ const html = `
 @import url('/src/styles/components.css');
 @import url('/src/styles/typo.css');
 
+:host {
+  display: flex;
+  width: 100%;
+}
+
 textarea {
   width: 100%;
   min-width: 100%;
