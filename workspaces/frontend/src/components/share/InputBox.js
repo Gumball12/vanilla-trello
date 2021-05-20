@@ -1,7 +1,7 @@
 import mvvm from '/src/share/MvvmHtmlElement/index.js';
 
 const html = `
-<input class="text">
+<input class="text" @input="updateValue">
 
 <style scoped>
 @import url('/src/styles/components.css');
@@ -23,6 +23,12 @@ window.customElements.define(
     constructor() {
       super({
         html,
+        data: {
+          insert: '',
+        },
+        methods: {
+          updateValue: ({ target: { value } }) => (this.$data.insert = value),
+        },
       });
     }
   },
