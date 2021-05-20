@@ -6,6 +6,10 @@ const html = `
 <style scoped>
 @import url('/src/styles/components.css');
 @import url('/src/styles/icon.css');
+
+:host {
+  height: 18px;
+}
 </style>
 `;
 
