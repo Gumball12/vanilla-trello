@@ -9,7 +9,6 @@ const html = `
 
 p.button {
   padding: 8px 0;
-  color: var(--gray);
   font-weight: normal;
   cursor: pointer;
   text-align: left;
