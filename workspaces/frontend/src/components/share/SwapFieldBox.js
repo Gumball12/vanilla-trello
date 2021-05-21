@@ -20,7 +20,6 @@ const html = `
 
 :host {
   background-color: var(--white);
-  padding: 8px;
   border-radius: 5px;
 }
 
@@ -28,11 +27,13 @@ const html = `
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 8px;
   cursor: pointer;
 }
 
 .field {
   display: flex;
+  padding: 8px;
   align-items: center;
   min-height: 18px;
 }
