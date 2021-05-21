@@ -1,5 +1,6 @@
 html,
 body {
+  display: flex; /* wrap full-width */
   height: 100%;
 }
 
