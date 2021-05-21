@@ -5,13 +5,13 @@ import './share/SwapFieldBox.js';
 import './share/TextareaBox.js';
 
 const html = `
-<swap-field-box @update="updateContents">
+<swap-field-box m-ref="field" @update="updateContents" @iconclick="emitRemoveCard">
   <textarea-box
     slot="field"
     m-data-placeholder="쉬프트 키와 엔터를 눌러 줄을 바꿀 수 있어요">
   </textarea-box>
 
-  create
+  delete
 </swap-field-box>
 
 <style scoped>
@@ -32,6 +32,8 @@ window.customElements.define(
         methods: {
           updateContents: ({ detail: contents }) =>
             (this.$data.contents = contents),
+          closeField: () => this.$ref.field.$methods.closeField(),
+          emitRemoveCard: () => this.$emit('removecard'),
         },
         mounted() {
           this.$data.id = randomString();
