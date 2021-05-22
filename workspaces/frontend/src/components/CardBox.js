@@ -39,10 +39,6 @@ window.customElements.define(
           updateContents: ({ detail: contents }) =>
             (this.$data.contents = contents),
           /**
-           * close the input field
-           */
-          closeField: () => this.$ref.field.$methods.closeField(),
-          /**
            * emit remove-card custom event
            */
           emitRemoveCard: () => this.$emit('removecard'),

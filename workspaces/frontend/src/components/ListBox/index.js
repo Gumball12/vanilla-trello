@@ -15,8 +15,7 @@ const html = `
     delete
   </swap-field-box>
 
-  <section m-ref="cards"
-    @click="editCard" @focusout="closeCard" @removecard="removeCard">
+  <section m-ref="cards" @focusout="closeCard" @removecard="removeCard">
   </section>
 
   <add-card-panel m-ref="add-card-panel"
@@ -64,34 +63,8 @@ window.customElements.define(
           title: '',
           transferCards: '', // one-way cards data updator
           cards: [], // child cards
-          targetCard: null,
         },
         methods: {
-          /**
-           * open the card's edit field
-           *
-           * - validate evt target
-           * - set {@code targetCard} data
-           * - close other cards
-           *
-           * @param {MouseEvent} evt
-           * @param {CardBox} evt.target
-           */
-          editCard: ({ target }) => {
-            // target validation
-            if (target.tagName !== 'CARD-BOX') {
-              return;
-            }
-
-            // set data
-            this.$data.targetCard = target;
-
-            // close cards without target card
-            const targetCardId = target.$data.id;
-            [...this.$root.querySelectorAll('card-box')]
-              .filter(({ $data: { id } }) => id !== targetCardId)
-              .forEach(card => card.$methods.closeField());
-          },
           /**
            * close the {@code targetCard} element
            *
@@ -100,14 +73,8 @@ window.customElements.define(
            * - assign a null value to {@code targetCard} data
            */
           closeCard: () => {
-            // close the card
-            this.$data.targetCard.$methods.closeField();
-
             // update card data
             this.$methods.updateCards(this.$data.cards);
-
-            // init targetCard
-            this.$data.targetCard = null;
           },
           /**
            * remove the card element
