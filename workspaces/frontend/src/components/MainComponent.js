@@ -174,6 +174,12 @@ window.customElements.define(
             },
           ],
         },
+        mounted() {
+          // sync data
+          state.$watcher.lists.push((oldValue, lists) => {
+            this.$data.transferLists = lists;
+          });
+        },
       });
     }
   },
