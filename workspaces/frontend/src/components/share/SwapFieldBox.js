@@ -71,6 +71,12 @@ window.customElements.define(
             this.$emit('displayfield');
           },
           closeField: () => {
+            // validate field is already closed
+            // => to avoid redundant event emit
+            if (!this.$data.isDisplayField) {
+              return;
+            }
+
             // close the field component
             this.$data.isDisplayField = false;
 
