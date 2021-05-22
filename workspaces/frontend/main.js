@@ -1,4 +1,5 @@
 import './src/app.js';
+import './src/state.js';
 
 // service worker
 if ('serviceWorker' in navigator) {
