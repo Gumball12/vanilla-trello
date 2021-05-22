@@ -47,6 +47,12 @@ window.customElements.define(
            */
           emitRemoveCard: () => this.$emit('removecard'),
         },
+        watch: {
+          contents: [
+            // update contents
+            (oldValue, contents) => (this.$ref.field.$data.contents = contents),
+          ],
+        },
         mounted() {
           // init state
           this.$data.id = randomString();
