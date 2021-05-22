@@ -1,0 +1,10 @@
+.placeholder {
+  background-color: var(--gray);
+  width: 100%;
+  border-radius: 5px;
+}
+
+card-box {
+  /* set width when drag */
+  width: calc(382px - 8px * 2);
+}

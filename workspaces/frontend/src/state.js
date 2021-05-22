@@ -14,6 +14,7 @@ window.customElements.define(
           lists: [],
         },
 
+        // actions
         methods: {
           /**
            * push {@code lists} data
@@ -35,6 +36,18 @@ window.customElements.define(
           },
           fetchPull: () => {
             // @todo: fetch-pull data
+          },
+          /**
+           * enable drag style
+           */
+          enableDrag: () => {
+            document.body.classList.add('drag');
+          },
+          /**
+           * disable drag style
+           */
+          disableDrag: () => {
+            document.body.classList.remove('drag');
           },
         },
         mounted() {

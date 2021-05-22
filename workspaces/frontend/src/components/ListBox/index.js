@@ -1,5 +1,6 @@
 import mvvm from '/src/share/MvvmHtmlElement/index.js';
 import randomString from '/src/share/randomString.js';
+import dndMousedown from '/src/share/dnd/index.js';
 
 import '../CardBox.js';
 import '../share/SwapFieldBox.js';
@@ -15,7 +16,7 @@ const html = `
     delete
   </swap-field-box>
 
-  <section m-ref="cards" @focusout="closeCard" @removecard="removeCard">
+  <section m-ref="cards" @mousedown="dndMousedown" @focusout="closeCard" @removecard="removeCard">
   </section>
 
   <add-card-panel m-ref="add-card-panel"
@@ -25,6 +26,7 @@ const html = `
 <style scoped>
 @import url('/src/styles/components.css');
 @import url('/src/styles/typo.css');
+@import url('/src/styles/dnd.css');
 
 .flex-wrapper {
   width: 382px;
@@ -134,6 +136,18 @@ window.customElements.define(
             cardBox.$data.contents = contents ?? '';
           },
           /**
+           * append a card-box element
+           *
+           * @param {CardBox} cardBox
+           */
+          appendCard: cardBox => {
+            // update data
+            this.$methods.updateCards([...this.$data.cards, cardBox]);
+
+            // append into the cards node
+            this.$ref.cards.appendChild(cardBox);
+          },
+          /**
            * emit {@code removelist} evt
            */
           emitRemoveList: () => this.$emit('removelist'),
@@ -159,6 +173,12 @@ window.customElements.define(
             // emit evt
             this.$emit('updatelist');
           },
+          /**
+           * drag-and-drop mousedown event handler
+           *
+           * @param {MouseEvent} evt
+           */
+          dndMousedown,
         },
         watch: {
           transferCards: [
