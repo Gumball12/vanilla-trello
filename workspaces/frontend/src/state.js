@@ -51,8 +51,6 @@ window.customElements.define(
               // get params
               const { syncId, lists } = JSON.parse(data);
 
-              console.log('pull', syncId, lists);
-
               // 1. check sync-id
               if (syncId === this.$data.syncId) {
                 this.$data.isUpdated = false;
