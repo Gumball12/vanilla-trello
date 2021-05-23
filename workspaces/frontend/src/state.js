@@ -1,5 +1,6 @@
 import mvvm from '/src/share/MvvmHtmlElement/index.js';
 import randomString from '/src/share/randomString.js';
+import { onmessage, send } from '/src/share/sock.js';
 
 window.customElements.define(
   'mini-state',
@@ -12,6 +13,7 @@ window.customElements.define(
         data: {
           syncId: '',
           lists: [],
+          isUpdated: false, // render update state
         },
 
         // actions
@@ -27,15 +29,48 @@ window.customElements.define(
 
             // push lists data
             this.$data.lists = lists;
+
+            // push to server
+            this.$methods.fetchPush();
           },
-          pullListsData: () => {
-            // @todo: req lists data
-          },
-          fetchPush: () => {
-            // @todo: fetch-push data (with throttling)
-          },
-          fetchPull: () => {
-            // @todo: fetch-pull data
+          /**
+           * push {@code lists} data to server
+           */
+          fetchPush: () =>
+            send(
+              JSON.stringify({
+                syncId: this.$data.syncId,
+                lists: this.$data.lists,
+              }),
+            ),
+          /**
+           * get {@code lists} data from server
+           */
+          fetchPull: () =>
+            onmessage(({ data }) => {
+              // get params
+              const { syncId, lists } = JSON.parse(data);
+
+              console.log('pull', syncId, lists);
+
+              // 1. check sync-id
+              if (syncId === this.$data.syncId) {
+                this.$data.isUpdated = false;
+                return;
+              }
+
+              // 2. update lists data
+              this.$data.syncId = syncId;
+              this.$data.lists = lists;
+
+              // 3. notify updated
+              this.$data.isUpdated = true;
+            }),
+          /**
+           * when pull when completed
+           */
+          endPullUpdate: () => {
+            this.$data.isUpdated = false;
           },
           /**
            * enable drag style
@@ -51,7 +86,8 @@ window.customElements.define(
           },
         },
         mounted() {
-          // @todo: fetch-pull data
+          // init
+          this.$methods.fetchPull();
         },
       });
     }

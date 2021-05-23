@@ -113,7 +113,9 @@ window.customElements.define(
             this.$data.lists = lists ?? this.$data.lists;
 
             // push to state
-            state.$methods.pushListsData(lists);
+            if (!state.$data.isUpdated) {
+              state.$methods.pushListsData(this.$data.lists);
+            }
           },
         },
         watch: {
@@ -175,9 +177,21 @@ window.customElements.define(
           ],
         },
         mounted() {
+          // update observer
+          new MutationObserver(() =>
+            // wait for render to finish
+            setTimeout(() => state.$methods.endUpdate()),
+          ).observe(this.$ref.main, {
+            subtree: true,
+            childList: true,
+          });
+
           // sync data
-          state.$watcher.lists.push((oldValue, lists) => {
-            this.$data.transferLists = lists;
+          state.$watcher.isUpdated.push((oldValue, isUpdated) => {
+            if (isUpdated) {
+              // wait for the 'isUpdated' state to be updated
+              setTimeout(() => (this.$data.transferLists = state.$data.lists));
+            }
           });
         },
       });

@@ -3,13 +3,11 @@ const THROTTLE_INTERVAL = 1000;
 
 const sock = new WebSocket(WSS_BASE);
 
-let isOpen = false;
-
 /**
  * try to connect with web-socket-server
  */
 export const tryOpen = () =>
-  new Promise(res => sock.addEventListener('open', () => res((isOpen = true))));
+  new Promise(res => sock.addEventListener('open', () => res()));
 
 /**
  * send message to server
@@ -22,7 +20,7 @@ export const send = (() => {
 
   return async msg => {
     // check connection
-    if (!isOpen) {
+    if (sock.readyState !== sock.OPEN) {
       await tryOpen();
     }
 
