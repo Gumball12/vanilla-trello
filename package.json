@@ -6,6 +6,7 @@
     "front-dev": "npm run --prefix workspaces/frontend dev",
     "front-build": "npm run --prefix workspaces/frontend build",
     "front-serve": "npm run --prefix workspaces/frontend serve",
+    "back-dev": "npm run --prefix workspaces/backend dev",
     "test": "jest"
   },
   "devDependencies": {
