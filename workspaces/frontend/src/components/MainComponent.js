@@ -180,7 +180,7 @@ window.customElements.define(
           // update observer
           new MutationObserver(() =>
             // wait for render to finish
-            setTimeout(() => state.$methods.endUpdate()),
+            setTimeout(() => state.$methods.endPullUpdate()),
           ).observe(this.$ref.main, {
             subtree: true,
             childList: true,
