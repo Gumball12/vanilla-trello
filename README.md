@@ -39,12 +39,14 @@ cd mini-trello
 # install dependencies
 yarn
 
-# start static web dev server (frontend)
+# 1. start static web dev server (frontend)
 yarn front-dev
 
-# start application web dev server (backend)
+# 2. start application web dev server (backend)
 yarn back-dev
 ```
+
+참고로 Front, Back 실행 순서는 어떠한 것을 먼저 실행해도 정상 작동합니다.
 
 ### Dependencies
 
@@ -158,4 +160,4 @@ VanillaJS 기반으로 퍼포먼스와 관련하여 다음의 기능을 구현�
 
 요구 사항에 맞춰 동작하는 mini-trello 데모 영상입니다.
 
-![Demo video]()
+[Demo video](./docs/video/demo.mp4)
