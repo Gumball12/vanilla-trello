@@ -118,11 +118,12 @@ const mousemove = ({ pageX, pageY }) => {
   // if the drag-target violates drag-prev boundary
   // = if drag-prev is placed further below the drag-target
   if (dragPrev !== null && isAbove(dragTarget, dragPrev)) {
-    swap(placeholder, dragTarget); // swap with placeholder <=> drag-target
-    swap(placeholder, dragPrev); // swap with placeholder <=> drag-prev
+    // move one-by-one elements
+    swap(dragPrev, dragTarget); // swap with drag-prev <=> drag-target
+    swap(dragPrev, placeholder); // swap with drag-prev <=> placeholder
 
     // swap cards data
-    swapCards(cards, dragTarget, dragPrev);
+    listBox.$data.cards = swapCards(cards, dragTarget, dragPrev);
 
     // emit update
     listBox.$emit('updatelist');
@@ -135,7 +136,7 @@ const mousemove = ({ pageX, pageY }) => {
     swap(placeNext, dragTarget); // swap with place-next <=> drag-target
 
     // swap cards data
-    swapCards(cards, placeNext, dragTarget);
+    listBox.$data.cards = swapCards(cards, placeNext, dragTarget);
 
     // emit update
     listBox.$emit('updatelist');
