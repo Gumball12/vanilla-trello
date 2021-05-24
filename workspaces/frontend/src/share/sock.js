@@ -1,5 +1,5 @@
 const WSS_BASE = 'ws://localhost:3001';
-const THROTTLE_INTERVAL = 1000;
+const THROTTLE_INTERVAL = 500;
 
 const sock = new WebSocket(WSS_BASE);
 
