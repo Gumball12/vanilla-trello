@@ -160,4 +160,5 @@ VanillaJS 기반으로 퍼포먼스와 관련하여 다음의 기능을 구현�
 
 요구 사항에 맞춰 동작하는 mini-trello 데모 영상입니다.
 
-[Demo video](./docs/video/demo.mp4)
+[Demo video](https://user-images.githubusercontent.com/28308362/119359049-2ab4f600-bce4-11eb-858e-22518cb8c71a.mp4)
+
