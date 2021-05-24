@@ -1,5 +1,6 @@
 import isAbove from './isAbove.js';
 import swap from './swap.js';
+import swapCards from './swapCards.js';
 import state from '/src/state.js';
 
 // set params
@@ -111,11 +112,21 @@ const mousemove = ({ pageX, pageY }) => {
   // get placeholder's next element
   const placeNext = placeholder.nextElementSibling;
 
+  // cards data
+  const cards = listBox.$data.cards;
+
   // if the drag-target violates drag-prev boundary
   // = if drag-prev is placed further below the drag-target
   if (dragPrev !== null && isAbove(dragTarget, dragPrev)) {
-    swap(placeholder, dragTarget); // swap with placeholder <=> drag-target
-    swap(placeholder, dragPrev); // swap with placeholder <=> drag-prev
+    // move one-by-one elements
+    swap(dragPrev, dragTarget); // swap with drag-prev <=> drag-target
+    swap(dragPrev, placeholder); // swap with drag-prev <=> placeholder
+
+    // swap cards data
+    listBox.$data.cards = swapCards(cards, dragTarget, dragPrev);
+
+    // emit update
+    listBox.$emit('updatelist');
   }
 
   // if the drag-target violates place-next boundary
@@ -123,6 +134,12 @@ const mousemove = ({ pageX, pageY }) => {
   if (placeNext !== null && isAbove(placeNext, dragTarget)) {
     swap(placeNext, placeholder); // swap with place-next <=> placeholder
     swap(placeNext, dragTarget); // swap with place-next <=> drag-target
+
+    // swap cards data
+    listBox.$data.cards = swapCards(cards, placeNext, dragTarget);
+
+    // emit update
+    listBox.$emit('updatelist');
   }
 };
 
