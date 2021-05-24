@@ -3,11 +3,21 @@ const THROTTLE_INTERVAL = 500;
 
 const sock = new WebSocket(WSS_BASE);
 
+// init connection state (not open)
+let isConnected = false;
+
 /**
  * try to connect with web-socket-server
+ *
+ * @returns {Promise}
  */
-export const tryOpen = () =>
-  new Promise(res => sock.addEventListener('open', () => res()));
+export const tryHello = () =>
+  new Promise(res => {
+    sock.addEventListener('open', () => {
+      sock.send('hello'); // init connection
+      res((isConnected = true));
+    });
+  });
 
 /**
  * send message to server
@@ -19,14 +29,14 @@ export const send = (() => {
   let throttle = null;
 
   return async msg => {
-    // check connection
-    if (sock.readyState !== sock.OPEN) {
-      await tryOpen();
-    }
-
     // check prev request
     if (throttle !== null) {
       clearTimeout(throttle);
+    }
+
+    // check connection
+    if (!isConnected) {
+      await tryHello();
     }
 
     // send data (throttling)
@@ -42,10 +52,16 @@ export const send = (() => {
  *
  * @param {Function} cb
  */
-export const onmessage = cb => sock.addEventListener('message', cb);
+export const onmessage = async cb => {
+  // check connection
+  if (!isConnected) {
+    await tryHello();
+  }
+
+  sock.addEventListener('message', cb);
+};
 
 export default {
   onmessage,
-  tryOpen,
   send,
 };

@@ -3,7 +3,7 @@ const { Server } = require('ws');
 const compression = require('compression');
 
 // sync data
-const data = null;
+let syncData = null;
 
 // create express app
 const app = require('express')();
@@ -21,22 +21,27 @@ const wss = new Server({ server });
  * set connection event handler
  */
 wss.on('connection', ws => {
-  // 1. send stored data
-  if (data !== null) {
-    ws.send(data);
-  }
-
   /**
    * received data (broadcast)
    *
    * @param {String} data
    */
-  ws.on('message', data =>
+  ws.on('message', data => {
+    if (data === 'hello') {
+      if (syncData !== null) {
+        // sync stored data
+        return ws.send(syncData);
+      }
+
+      // syncData === null => nothing
+      return;
+    }
+
     wss.clients.forEach(client => {
-      data = data;
-      client.send(data);
-    }),
-  );
+      syncData = data;
+      client.send(syncData);
+    });
+  });
 });
 
 // start the web server
