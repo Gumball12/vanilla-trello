@@ -32,6 +32,8 @@ window.customElements.define(
 
             // push to server
             this.$methods.fetchPush();
+
+            console.log('push');
           },
           /**
            * push {@code lists} data to server
