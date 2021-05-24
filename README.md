@@ -147,7 +147,7 @@ _AddPanel component_
 
 ### Functions
 
-VanillaJS 기반으로 퍼포먼스와 관련하여 다음의 기능을 구현하였습니다.
+VanillaJS 기반으로 다음의 기능을 구현하였습니다.
 
 - [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) 및 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 이용해 `fetch` 이벤트를 후킹 및 요청하는 폰트 에셋 캐싱
 - [Web Socket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)을 이용하여 다른 클라이언트와 실시간 데이터 연동
@@ -155,6 +155,7 @@ VanillaJS 기반으로 퍼포먼스와 관련하여 다음의 기능을 구현�
 - [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) 기반의 [MVVM 프레임워크 및 Reactive data models를 구현](./workspaces/frontend/src/share/MvvmHtmlElement/MvvmHTMLElement.js)해 확장성 있는 컴포넌트 및 애플리케이션 구성
 - [Native ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) 기반으로 JavaScript 코드 모듈화
 - Provider 패턴의 [Global state 구현](./workspaces/frontend/src/state.js)
+- [드래그 앤 드롭](./workspaces/frontend/src/share/dnd/index.js)
 
 ## Demo video
 
