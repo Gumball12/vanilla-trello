@@ -86,13 +86,13 @@ yarn back-dev
 
 #### CardBox components
 
-**CardBox components**
+_CardBox components_
 
 ![CardBox component](./docs/images/CardBox.png)
 
 ![CardBox component (contents)](./docs/images/CardBox_contents.png)
 
-**AddCardPanel component**
+_AddCardPanel component_
 
 ![AddCardPanel component](./docs/images/AddCardPanel.png)
 
@@ -101,7 +101,7 @@ yarn back-dev
 
 #### ListBox components
 
-**ListBox Components**
+_ListBox Components_
 
 ![ListBox component](./docs/images/ListBox.png)
 
@@ -111,7 +111,7 @@ yarn back-dev
 
 ![ListBox component (select)](./docs/images/ListBox_select.png)
 
-**AddListPanel component**
+_AddListPanel component_
 
 ![AddListPanel component](./docs/images/AddListPanel.png)
 
@@ -120,7 +120,7 @@ yarn back-dev
 
 #### Main components
 
-**TitleBox component**
+_TitleBox component_
 
 ![TitleBox component](./docs/images/TitleBox.png)
 
@@ -129,11 +129,11 @@ yarn back-dev
 
 #### Share components
 
-**InputBox component**
+_InputBox component_
 
 ![InputBox](./docs/images/InputBox.png)
 
-**AddPanel component**
+_AddPanel component_
 
 ![AddPanel](./docs/images/AddPanel.png)
 
