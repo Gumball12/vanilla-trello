@@ -55,6 +55,12 @@ window.customElements.define(
           isDisplayField: false,
         },
         methods: {
+          /**
+           * display field component
+           *
+           * @param {MouseEvent} evt
+           * @param {HTMLElement} evt.target
+           */
           displayField: ({ target }) => {
             // ignore icon click event
             if (target.tagName === 'SLOT') {
@@ -70,6 +76,9 @@ window.customElements.define(
             // emit display-field event
             this.$emit('displayfield');
           },
+          /**
+           * close the field component
+           */
           closeField: () => {
             // validate field is already closed
             // => to avoid redundant event emit
@@ -87,6 +96,11 @@ window.customElements.define(
             // emit update event with contents
             this.$emit('update', this.$data.contents);
           },
+          /**
+           * try close field with keydown event
+           *
+           * @param {KeyboardEvent} evt
+           */
           tryCloseFieldWithKeydown: evt => {
             const { code, shiftKey } = evt;
 
@@ -102,6 +116,9 @@ window.customElements.define(
               this.$methods.closeField();
             }
           },
+          /**
+           * emit the iconclick event
+           */
           emitIconClick: () => {
             this.$emit('iconclick');
           },
