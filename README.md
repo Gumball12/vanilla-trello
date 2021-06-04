@@ -1,8 +1,8 @@
-# mini-trello
+# vanilla-trello
 
-제시된 과제인 Trello를 Vanilla JS로 클론하는 프로젝트를 진행하였습니다.
+Vanilla JS로 Trello 구현하기.
 
-프런트엔드 중심으로 구현을 진행하였으며, 다음의 요구사항에 따라 구현하였습니다.
+프런트엔드 중심으로 구현을 진행하였으며, 다음의 요구사항에 따라 구현.
 
 - Frontend
   - 텍스트를 입력할 수 있는, 그리고 드래그가 가능한 카드
@@ -12,7 +12,7 @@
 - Backend
   - 하나의 클라이언트에서 데이터가 업데이트 되는 경우, 이를 브로드캐스팅
 
-과제를 진행하며 알게 된 내용들 중 실제 과제를 해결하는 것과는 직접적으로 연관되지 않는 아티클 두 개를 작성하였으며, 아래의 링크에서 확인하실 수 있습니다.
+과제를 진행하며 알게 된 내용들 중 실제 과제를 해결하는 것과는 직접적으로 연관되지 않는 아티클 두 개를 작성하였으며, 아래의 링크에서 확인하실 수 있다.
 
 - [stale-while-revalidate Cache-Control extension](https://n.shj.rip/UX-stale-while-revalidate-Cache-Control-extension-86866b92bfc742f7bc2c0dc9d5696d71)
 - [Service Worker를 이용한 Assets Caching](https://n.shj.rip/UX-Service-Worker-Assets-Caching-bc900e3fcc714a7eb81d3ffb8cdf6f37)
@@ -29,12 +29,12 @@
 
 ## Getting started
 
-mini-trello는 [Yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) 기반의 monorepo로 구성하였으며, 다음의 명령으로 설치 및 실행이 가능합니다.
+vanilla-trello는 [Yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) 기반의 monorepo로 구성하였으며, 다음의 명령으로 설치 및 실행이 가능.
 
 ```sh
 # clone this repository
-git clone https://github.com/Gumball12/mini-trello # private repo
-cd mini-trello
+git clone https://github.com/Gumball12/vanilla-trello # private repo
+cd vanilla-trello
 
 # install dependencies
 yarn
@@ -46,11 +46,11 @@ yarn front-dev
 yarn back-dev
 ```
 
-참고로 Front, Back 실행 순서는 어떠한 것을 먼저 실행해도 정상 작동합니다.
+참고로 Front, Back 실행 순서는 어떠한 것을 먼저 실행해도 정상 작동함.
 
 ### Dependencies
 
-설치되는 모듈은 다음과 같습니다.
+설치되는 모듈은 다음과 같음.
 
 - Share
   - babel, jest (unit test)
@@ -64,23 +64,23 @@ yarn back-dev
 
 ### Vite
 
-프런트엔드 개발을 진행하며 [ViteJS](https://vitejs.dev) 빌드 툴을 이용했습니다. 물론 [Native ESM(EcmaScript-Module)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)을 완벽하게 지원하도록 구현했기에, `live-server`와 같은 Static Web Server만으로도 에러 없이 구동이 가능합니다.
+프런트엔드 개발을 진행하며 [ViteJS](https://vitejs.dev) 빌드 툴을 이용함. 물론 [Native ESM(EcmaScript-Module)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)을 완벽하게 지원하도록 구현했기에, `live-server`와 같은 Static Web Server만으로도 에러 없이 구동이 가능.
 
-그럼 Vite을 사용한 이유는 무엇일까요? 여기에는 다음의 이점이 있습니다.
+그럼 Vite을 사용한 이유는 무엇일까? 여기에는 다음의 이점이 있다.
 
 - Static Web Server로 이용이 가능
 - ESM 기반의 빠른 HMR(Hot-Module-Replacement) 가능
 - 수정되지 않은 JavaScript 소스는 자동으로 캐싱 (`304 Not-Modified`)
 
-이러한 이점을 가진 Vite을 이용하면 빠르고 수월하게 개발을 진행할 수 있기에, 이를 이용해 개발을 진행하게 되었습니다.
+이러한 이점을 가진 Vite을 이용하면 빠르고 수월하게 개발을 진행할 수 있기에, 이를 이용해 개발을 진행하게 됨.
 
-참고로 당연히 실제 애플리케이션에는 명시된 제한사항과 같이 Google Material Icon CSS 파일 하나만을 제외하고 외부 모듈을 일체 사용하지 않았으며, 모든 모듈은 모두 직접 구현하여 작성했습니다.
+참고로 당연히 실제 애플리케이션에는 명시된 제한사항과 같이 Google Material Icon CSS 파일 하나만을 제외하고 외부 모듈을 일체 사용하지 않았으며, 모든 모듈은 모두 직접 구현하여 작성함.
 
 ## Features
 
 ### Components
 
-실제 개발 전, Figma를 이용해 컴포넌트 단위의 프로토타이핑을 진행하였습니다. 아래의 링크로 접속이 가능합니다.
+실제 개발 전, Figma를 이용해 컴포넌트 단위의 프로토타이핑을 진행함. 아래의 링크로 접속이 가능.
 
 [Components (Figma)](https://www.figma.com/file/58DY3lnxAfbkWScAF2Ape8/mini-trello?node-id=2%3A0)
 
@@ -147,7 +147,7 @@ _AddPanel component_
 
 ### Functions
 
-VanillaJS 기반으로 다음의 기능을 구현하였습니다.
+VanillaJS 기반으로 다음의 기능을 구현함.
 
 - [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) 및 [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API를 이용해 `fetch` 이벤트를 후킹 및 요청하는 폰트 에셋 캐싱
 - [Web Socket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)을 이용하여 다른 클라이언트와 실시간 데이터 연동
@@ -158,8 +158,6 @@ VanillaJS 기반으로 다음의 기능을 구현하였습니다.
 - [드래그 앤 드롭](./workspaces/frontend/src/share/dnd/index.js)
 
 ## Demo video
-
-요구 사항에 맞춰 동작하는 mini-trello 데모 영상입니다.
 
 [Demo video](https://user-images.githubusercontent.com/28308362/119359049-2ab4f600-bce4-11eb-858e-22518cb8c71a.mp4)
 
