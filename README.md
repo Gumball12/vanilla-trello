@@ -1,4 +1,170 @@
-# vanilla-trello
+# vanilla-trello (en)
+
+[ko](#vanilla-trello-ko) | en
+
+[Demo video](https://user-images.githubusercontent.com/28308362/119359049-2ab4f600-bce4-11eb-858e-22518cb8c71a.mp4)
+
+Implementing Trello application with Vanilla JavaScript.
+
+Implementation was carried out centered on the front-end, and implemented according to the following requirements:
+
+- Frontend
+  - Text-inputable and Draggable cards
+  - Card list
+  - Automatically sync with other Trello clients
+  - Prohibition of use of external modules
+- Backend
+  - When data is updated in one client, broadcast all other clients
+
+And I wrote two articles about what I learned while doing this project, and you can check it out at the link below(korean):
+
+- [stale-while-revalidate Cache-Control extension](https://n.shj.rip/UX-stale-while-revalidate-Cache-Control-extension-86866b92bfc742f7bc2c0dc9d5696d71)
+- [Assets Caching using the Service Worker API](https://n.shj.rip/UX-Service-Worker-Assets-Caching-bc900e3fcc714a7eb81d3ffb8cdf6f37)
+
+## Contents
+
+- Getting started
+  - Dependencies
+  - Vite
+- Features
+  - Components
+  - Functions
+
+## Getting started
+
+vanilla-trello is configured as a 'Monorepo' based on the [Yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/), and can be installed and run with the following command:
+
+```sh
+# clone this repository
+git clone https://github.com/Gumball12/vanilla-trello
+cd vanilla-trello
+
+# install dependencies
+yarn
+
+# 1. start static web dev server (frontend)
+yarn front-dev
+
+# 2. start application web dev server (backend)
+yarn back-dev
+```
+
+The order of Front and Back command execution works normally no matter which one is executed first.
+
+### Dependencies
+
+The installed modules are as follows.
+
+- Share
+  - babel, jest (unit test)
+  - chalk, yorkie (verify commit message)
+- Backend
+  - express (web framework)
+  - compression (compression data)
+  - ws ([WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) server)
+- Frontend
+  - vite (build tool)
+
+### Vite
+
+I use the [ViteJs](https://vitejs.dev) build tool while developing the front-end application. Of course, vanilla-trello front-end is implemented to fully support [Native ESM(EcmaScript-Module)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), so it is possible to run without errors only with Static Web Server.
+
+So, why did I use the ViteJS? This has the following advantages:
+
+- Can be used as a Static Web Server
+- ESM-based fast HMR(Hot-Module-Replacement) possible
+- Automatically cache unmodified JavaScript sources (`304 Not-Modified`) => improve dev performance!
+
+If I use the Vite with these advantages, can proceed with development quickly and easily.
+
+Of course, no external modules are used except Google Material Icon CSS and Font files, as in the actual application, and all modules are implemented and written by hand.
+
+## Features
+
+### Components
+
+Before development, prototyping of each component using Figma. It can be accessed throught the link below:
+
+[Components (Figma)](https://www.figma.com/file/58DY3lnxAfbkWScAF2Ape8/mini-trello?node-id=2%3A0)
+
+Implemented compoents are as follows:
+
+#### CardBox components
+
+_CardBox components_
+
+![CardBox component](./docs/images/CardBox.png)
+
+![CardBox component (contents)](./docs/images/CardBox_contents.png)
+
+_AddCardPanel component_
+
+![AddCardPanel component](./docs/images/AddCardPanel.png)
+
+- [CardBox](./workspaces/frontend/src/components/CardBox.js): Card component with text contents (draggable)
+- [AddCardPanel](./workspaces/frontend/src/components/ListBox/AddCardPanel.js): Button to add a CardBox component
+
+#### ListBox components
+
+_ListBox Components_
+
+![ListBox component](./docs/images/ListBox.png)
+
+![ListBox component (card)](./docs/images/ListBox_card.png)
+
+![ListBox component (cards)](./docs/images/ListBox_cards.png)
+
+![ListBox component (select)](./docs/images/ListBox_select.png)
+
+_AddListPanel component_
+
+![AddListPanel component](./docs/images/AddListPanel.png)
+
+- [ListBox](./workspaces/frontend/src/components/ListBox/index.js): List of the CardBox components
+- [AddListPanel](./workspaces/frontend/src/components/AddListPanel.js): Button to add a ListBox component
+
+#### Main components
+
+_TitleBox component_
+
+![TitleBox component](./docs/images/TitleBox.png)
+
+- [TitleBox](./workspaces/frontend/src/components/TitleBox.js): Title component
+- [MainComponent](./workspaces/frontend/src/components/MainComponent.js): `<main>` tag component
+
+#### Share components
+
+_InputBox component_
+
+![InputBox](./docs/images/InputBox.png)
+
+_AddPanel component_
+
+![AddPanel](./docs/images/AddPanel.png)
+
+- [InputBox](./workspaces/frontend/src/components/share/InputBox.js): Input field component
+- [TextareaBox](./workspaces/frontend/src/components/share/TextareaBox.js): Textarea field component
+- [IconBox](./workspaces/frontend/src/components/share/IconBox.js): Icon button component
+- [AddPanel](./workspaces/frontend/src/components/share/AddPanel.js): Button to add CardBox and ListBox components
+- [SwapFieldBox](./workspaces/frontend/src/components/share/SwapFieldBox.js): Component that swaps Input/Textarea field and Card when clicked
+
+### Functions
+
+Based on the Vanilla JavaScript, the following functions are implemented:
+
+- [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) and [Cache Storage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage) API to hook and request the `fetch` event for caching font assets
+- Real-time data interworking with other clients using the [Web Socket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
+- When sending data to the server, implement [throttling](./workspaces/frontend/src/share/sock.js) to prevent a large amount of datas from being trasmitted at once
+- Based on the [Web Components API](https://developer.mozilla.org/en-US/docs/Web/Web_Components), [implementing MVVM framework and reactive data models](./workspaces/frontend/src/share/MvvmHtmlElement/MvvmHTMLElement.js) to configure extensible components and applications
+- JavaScript code modularization based on the [Native ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+- Implement [Global state](./workspaces/frontend/src/state.js) of the [Provider pattern](./workspaces/frontend/src/state.js)
+- [dnd](./workspaces/frontend/src/share/dnd/index.js)
+
+# vanilla-trello (ko)
+
+ko | [en](#vanilla-trello-en)
+
+[Demo video](https://user-images.githubusercontent.com/28308362/119359049-2ab4f600-bce4-11eb-858e-22518cb8c71a.mp4)
 
 Vanilla JS로 Trello 구현하기.
 
@@ -12,20 +178,19 @@ Vanilla JS로 Trello 구현하기.
 - Backend
   - 하나의 클라이언트에서 데이터가 업데이트 되는 경우, 이를 브로드캐스팅
 
-과제를 진행하며 알게 된 내용들 중 실제 과제를 해결하는 것과는 직접적으로 연관되지 않는 아티클 두 개를 작성하였으며, 아래의 링크에서 확인하실 수 있다.
+과제를 진행하며 알게 된 내용들에 대해 아티클 두 개를 작성하였으며, 아래의 링크에서 확인하실 수 있다.
 
 - [stale-while-revalidate Cache-Control extension](https://n.shj.rip/UX-stale-while-revalidate-Cache-Control-extension-86866b92bfc742f7bc2c0dc9d5696d71)
 - [Service Worker를 이용한 Assets Caching](https://n.shj.rip/UX-Service-Worker-Assets-Caching-bc900e3fcc714a7eb81d3ffb8cdf6f37)
 
 ## 목차
 
-- [Getting started](#getting-started)
-  - [Dependencies](#dependencies)
-  - [Vite](#vite)
-- [Features](#features)
-  - [Components](#components)
-  - [Functions](#functions)
-- [Demo video](#demo-video)
+- Getting started
+  - Dependencies
+  - Vite
+- Features
+  - Components
+  - Functions
 
 ## Getting started
 
@@ -33,7 +198,7 @@ vanilla-trello는 [Yarn workspaces](https://classic.yarnpkg.com/en/docs/workspac
 
 ```sh
 # clone this repository
-git clone https://github.com/Gumball12/vanilla-trello # private repo
+git clone https://github.com/Gumball12/vanilla-trello
 cd vanilla-trello
 
 # install dependencies
@@ -72,9 +237,9 @@ yarn back-dev
 - ESM 기반의 빠른 HMR(Hot-Module-Replacement) 가능
 - 수정되지 않은 JavaScript 소스는 자동으로 캐싱 (`304 Not-Modified`)
 
-이러한 이점을 가진 Vite을 이용하면 빠르고 수월하게 개발을 진행할 수 있기에, 이를 이용해 개발을 진행하게 됨.
+이러한 이점을 가진 Vite을 이용하면 빠르고 수월하게 개발을 진행할 수 있기에, 이를 이용함.
 
-참고로 당연히 실제 애플리케이션에는 명시된 제한사항과 같이 Google Material Icon CSS 파일 하나만을 제외하고 외부 모듈을 일체 사용하지 않았으며, 모든 모듈은 모두 직접 구현하여 작성함.
+참고로 당연히 실제 애플리케이션에는 명시된 제한사항과 같이 Google Material Icon CSS 및 폰트 파일을 제외하고 외부 모듈을 일체 사용하지 않았으며, 모든 모듈은 모두 직접 구현하여 작성함.
 
 ## Features
 
@@ -84,7 +249,7 @@ yarn back-dev
 
 [Components (Figma)](https://www.figma.com/file/58DY3lnxAfbkWScAF2Ape8/mini-trello?node-id=2%3A0)
 
-구현된 컴포넌트는 다음과 같습니다.
+구현된 컴포넌트는 다음과 같다.
 
 #### CardBox components
 
@@ -156,8 +321,3 @@ VanillaJS 기반으로 다음의 기능을 구현함.
 - [Native ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) 기반으로 JavaScript 코드 모듈화
 - Provider 패턴의 [Global state 구현](./workspaces/frontend/src/state.js)
 - [드래그 앤 드롭](./workspaces/frontend/src/share/dnd/index.js)
-
-## Demo video
-
-[Demo video](https://user-images.githubusercontent.com/28308362/119359049-2ab4f600-bce4-11eb-858e-22518cb8c71a.mp4)
-
